@@ -2,6 +2,8 @@
 
 Part of [Barn](https://rogerbarnfather.github.io/barn-website/).
 
+Live at <https://rogerbarnfather.github.io/barnspec-website/>.
+
 The website for [Barnspec](https://packagist.org/packages/rmb32/barnspec): an introduction, the
 philosophy, a quick start and the documentation. Static HTML, no build step; open `index.html` in a
 browser. Links between pages are relative, because GitHub Pages serves a project site from a subpath.
