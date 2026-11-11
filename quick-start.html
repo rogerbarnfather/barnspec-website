@@ -183,6 +183,17 @@ Wrote: docs/stories/cancel-their-booking.html</code></pre>
 <p>This serves the barn on your own machine and opens it in your browser; stop it with Ctrl-C. It lists the areas of
 business, and opening <em>reservations</em> shows the same story map with a card for each story. The
 <a href="docs/gui.html">browser app</a> page covers the rest.</p>
+<h2 id="agent-skills">Let your AI agent help <a class="anchor" href="#agent-skills" aria-label="Link to this section">#</a></h2>
+<p>If you work with an AI agent, copy Barnspec’s agent skills into the project:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec skills:install
+barnspec-getting-started: 2 written, 0 up to date, 0 left as you changed them
+barnspec-phases: 1 written, 0 up to date, 0 left as you changed them
+barnspec-shaping-a-phase: 2 written, 0 up to date, 0 left as you changed them
+barnspec-writing-scenarios: 1 written, 0 up to date, 0 left as you changed them
+barnspec-writing-stories: 1 written, 0 up to date, 0 left as you changed them
+Skills are in …/hotel/.claude/skills</code></pre>
+<p>These are five skills in <code>.claude/skills/</code>, the folder Claude Code reads (<code>--dir=&lt;folder&gt;</code> for another agent’s). They teach your agent what Barnspec keeps, the commands that read and the ones that write, and how to write Stories, Scenarios and Phases the Barnspec way. Ask it to turn a description of what you want next into a Phase, review your Stories, or check whether a Phase is ready to release: it reads what you have captured first, drafts, asks you grouped questions, and writes through the commands only once you agree.</p>
+<p>Run the command again after updating Barnspec: files you have changed are kept unless you pass <code>--force</code>.</p>
 <h2 id="where-next">Where next <a class="anchor" href="#where-next" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="docs/prove.html">Prove a Scenario</a>: open a ticket, run the Scenario against your real software and watch it turn green.</li><li><a href="docs/phases.html">Phases, releasing and changing</a>: how a slice of work is released, and how a released story changes.</li><li><a href="philosophy.html">Philosophy</a>: why stories are written this way.</li></ul>
 <p class="in-barn-left">Used in Barn: in a <a href="https://rogerbarnfather.github.io/barn-website/barn.html">barn</a>, Barnspec is the Spec tab. <code>barnspec init</code> makes any project a barn so Barnspec can work on its own.</p>
