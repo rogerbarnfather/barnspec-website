@@ -1,0 +1,53 @@
+/* Barnspec's own components. Everything shared by every Barn website is in
+ * base/ (see base/base.css); this file is unlayered, so it wins over base/. */
+
+.tool-mark {
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.maturity {
+  max-width: 40rem;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+.ways {
+  & .card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border-top: 4px solid var(--brand);
+
+    &:hover {
+      border-color: var(--brand);
+    }
+
+    & h3 {
+      margin-top: 0;
+    }
+
+    & .more {
+      margin-top: auto;
+      padding-top: 12px;
+      color: var(--brand-text);
+      font-weight: 650;
+
+      &::after {
+        content: " →";
+      }
+    }
+  }
+}
+
+.in-barn {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text-muted);
+}

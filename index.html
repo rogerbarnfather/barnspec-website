@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Introduction · Barnspec</title>
+  <meta name="description" content="Barnspec maps software by the needs of the people it serves, builds it a slice at a time, and only calls work done when the real software proves it.">
+  <link rel="icon" href="assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/base/base.css">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="philosophy.html">Philosophy</a></li>
+          <li><a href="quick-start.html">Quick start</a></li>
+          <li><a href="docs/index.html">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Barnspec</span>
+        <h1>See what’s proven, what’s being built, and <span class="accent">why</span>.</h1>
+        <p class="lede">Barnspec maps your software by the needs of the people it serves. Build it a slice at a time, and watch each piece turn green only when the real software proves it.</p>
+        <div class="actions">
+          <a class="btn" href="quick-start.html">Quick start</a>
+          <a class="btn ghost" href="philosophy.html">Why it works this way</a>
+        </div>
+        <aside class="callout note maturity">
+          <p><strong>Note.</strong> Barnspec is early software (version 0.x) and not ready for real projects yet. The minor version is the one that breaks.</p>
+        </aside>
+      </div>
+      <div class="wrap wide hero-shot">
+        <figure class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Barnspec · Story map</span></div>
+          <img src="assets/screens/spec-map.webp" width="1408" height="522" alt="The Barnspec Story map for a hotel’s reservations: every story once, as it reads now, grouped by the role that wants it. Columns follow a stay from establishing to terminating. Stories changed since they were first released are marked elaborated, and those still being built are marked planned.">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="feature" id="stories">
+          <div>
+            <span class="kicker">Start from people</span>
+            <h2>Stories, not tickets.</h2>
+            <p>Every piece of work starts as a sentence anyone can check: <strong>who</strong> needs something, <strong>what</strong> they want to do, and <strong>what they get</strong> from it. Barnspec’s wizard asks you to complete each sentence, so no code or framework knowledge is needed.</p>
+            <p>The map then lays stories out along the person’s journey, from getting started to finishing up, so gaps are obvious at a glance.</p>
+          </div>
+          <div class="panel" role="figure" aria-label="An example story">
+            <p class="sentence">A <span class="who">guest</span> wants to <span class="what">book again from a past stay</span>, so they <span class="why">can come back in a moment</span>.</p>
+            <div class="sentence-key" aria-hidden="true"><span class="k-who">who</span><span class="k-what">what</span><span class="k-why">why</span></div>
+            <ul class="examples">
+              <li><span class="lamp red"></span>book room 101 again for 2 nights from 1 December<span class="state">built, not proven</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature flip" id="language">
+          <div>
+            <span class="kicker">One language</span>
+            <h2>One word, one meaning, for everyone.</h2>
+            <p>Every person, thing and action in a story is given a meaning in plain words the first time it’s used. From then on, every story and every example uses <strong>the same word for the same thing</strong>.</p>
+            <p>Together those words are the business’s own language, kept as a glossary beside the map. Stakeholders, developers and newcomers all read the same meanings, so nobody forgets what “booking” meant.</p>
+          </div>
+          <div class="panel" role="figure" aria-label="An extract from a hotel’s reservations glossary">
+            <span class="stamp">📖 Glossary · reservations</span>
+            <dl class="terms">
+              <div class="who">
+                <dt>guest<span class="kind">who</span></dt>
+                <dd>choosing and securing somewhere to stay</dd>
+              </div>
+              <div>
+                <dt>booking<span class="kind">thing</span></dt>
+                <dd>a guest’s hold on a room for a run of nights</dd>
+                <dd><ul>
+                  <li><b>is confirmed</b>: holds the room for the guest on these nights</li>
+                  <li><b>has been cancelled</b>: no longer holds the room</li>
+                </ul></dd>
+              </div>
+            </dl>
+            <p class="terms-note">Written once, then used word for word in every story, example and test.</p>
+          </div>
+        </div>
+
+        <div class="feature stacked" id="proof">
+          <div>
+            <div class="copy-head">
+              <span class="kicker">Proof, not promises</span>
+              <h2>A board that can’t be gamed.</h2>
+            </div>
+            <div>
+              <p>Each story is pinned down by concrete examples. Tickets track the work, but moving a ticket to Done never makes anything green. Only <strong>a passing run against the real software</strong> does, and a later failure turns it red again.</p>
+              <p>So when Barnspec says a story is fulfilled, it is. Nobody has to take anyone’s word for it.</p>
+            </div>
+          </div>
+          <figure>
+            <div class="shot">
+              <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Barnspec · Work</span></div>
+              <img src="assets/screens/spec-work.webp" width="1408" height="638" loading="lazy" alt="A Barnspec work board for the scenario “add Alex to the 3-night booking for room 12”. The brief gives the Given condition, the action and the expected outcome. Both tickets are done, yet it reads “All tickets done — not yet run”, with the command that proves it.">
+            </div>
+            <figcaption>Both tickets are done. It stays “not yet proven” until a run says otherwise.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature" id="focus">
+          <div>
+            <span class="kicker">Focus</span>
+            <h2>One slice at a time.</h2>
+            <p>Work happens in slices, which Barnspec calls Phases: small, whole pieces of value, built from end to end. There is the slice being built now and the ones already released. <strong>There is no backlog</strong>, and nothing to estimate.</p>
+            <p>When every story in the slice is proven, release it, copy its release notes and start the next. Barnspec refuses to release a slice that isn’t proven, with no way around it.</p>
+          </div>
+          <div class="panel" role="figure" aria-label="Slices of work: three released, one being built">
+            <ul class="phases">
+              <li class="now"><span class="bar"></span><span class="name">returning guests</span><span class="meta">being built now</span></li>
+              <li><span class="bar"></span><span class="name">tightening bookings</span><span class="meta">✓ released</span></li>
+              <li><span class="bar"></span><span class="name">changing plans</span><span class="meta">✓ released</span></li>
+              <li><span class="bar"></span><span class="name">first bookings</span><span class="meta">✓ released</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="ways-in">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Where next</span>
+          <h2>Three ways in.</h2>
+        </div>
+        <div class="grid three ways">
+          <a class="card" href="quick-start.html"><h3>Quick start</h3><p>Install Barnspec, capture a first story and see it on the map.</p><span class="more">Start here</span></a>
+          <a class="card" href="philosophy.html"><h3>Philosophy</h3><p>Why a story is a statement of value, and why nothing turns green without proof.</p><span class="more">Read why</span></a>
+          <a class="card" href="docs/index.html"><h3>Documentation</h3><p>The model, the browser app, the command line and the glossary, task by task.</p><span class="more">Browse the documentation</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="in-barn">Used in Barn: in a <a href="https://rogerbarnfather.github.io/barn-website/barn.html">barn</a>, Barnspec is the Spec tab. It works on its own too.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="index.html" aria-current="page">Introduction</a>
+        <a href="philosophy.html">Philosophy</a>
+        <a href="quick-start.html">Quick start</a>
+        <a href="docs/index.html">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
