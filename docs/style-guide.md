@@ -6,7 +6,7 @@ win for anything they state. This guide adds only Barnspec's vocabulary, colour 
 
 ## 1. Colour
 
-Barnspec is mint. Every page has `<body data-brand="spec">`, and components read `--brand`,
+Barnspec is sky blue. Every page has `<body data-brand="spec">`, and components read `--brand`,
 `--brand-ink`, `--brand-text`, `--brand-bright` and `--brand-tint`. No hex value appears in a page or in
 `assets/site.css`; the tokens come from `assets/base/tokens.css`.
 
@@ -32,7 +32,7 @@ The header navigation is the same on every page: Philosophy, Quick start, Docume
 
 ## 4. Exceptions
 
-- The site header's wordmark is Barnspec's own mark in a mint tile, not the Barn barn mark. Reason: each
+- The site header's wordmark is Barnspec's own mark in a sky-blue tile, not the Barn barn mark. Reason: each
   tool site reads as if the other tools did not exist (website guide §1). The `.tool-mark` rule is in
   `assets/site.css`.
 - The header links to the main Barn site as "Barn", in place of the tool tabs of the main site.
