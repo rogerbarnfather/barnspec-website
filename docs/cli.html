@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Command reference · Barnspec</title>
+  <meta name="description" content="Every Barnspec command, grouped by what it does, with the options all commands share.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html" aria-current="page">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Command reference</h1>
+        <p class="lede">Every command, in one place.</p>
+<h2 id="shorter">Typing less <a class="anchor" href="#shorter" aria-label="Link to this section">#</a></h2>
+<p>Two optional ways to avoid typing <code>vendor/bin/barnspec</code>. Put <code>vendor/bin</code> on your <code>PATH</code>
+once (in your shell profile or a project’s <code>.envrc</code>), and it is <code>barnspec</code>. Or add a script to your own
+<code>composer.json</code> and run it with <code>composer run barnspec -- &lt;command&gt;</code>. The <code>--</code> matters: without it
+Composer takes anything beginning <code>--</code> for itself, silently.</p>
+<aside class="callout warning"><p><strong>Warning.</strong> Composer stops any script still running after 300 seconds. That would end an interactive command such as <code>refine</code> left waiting. Run interactive commands through <code>vendor/bin/barnspec</code> or your <code>PATH</code>, not a Composer script.</p></aside>
+<h2 id="options">Options every command takes <a class="anchor" href="#options" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Option</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>-h</code>, <code>--help</code></td><td>Show a command’s own full list of flags.</td></tr><tr><td><code>-n</code>, <code>--no-interaction</code></td><td>Never ask a question.</td></tr><tr><td><code>-q</code>, <code>--quiet</code></td><td>Print only errors.</td></tr><tr><td><code>--silent</code></td><td>Print nothing.</td></tr><tr><td><code>-v</code>, <code>-vv</code>, <code>-vvv</code></td><td>Print more.</td></tr><tr><td><code>--ansi</code>, <code>--no-ansi</code></td><td>Force or disable colour.</td></tr></tbody></table></div>
+<p><code>vendor/bin/barnspec list</code> prints every command and <code>vendor/bin/barnspec help &lt;command&gt;</code> prints its flags. Those are the full reference; this page is the map.</p>
+<h2 id="commands">Barnspec commands <a class="anchor" href="#commands" aria-label="Link to this section">#</a></h2>
+<h3 id="make-a-barn">Make a barn <a class="anchor" href="#make-a-barn" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>init</code></td><td>Make a barn here if there is none, and say where Barnspec keeps its spec.</td></tr><tr><td><code>gui</code></td><td>Start the browser app and open it.</td></tr></tbody></table></div>
+<h3 id="capture">Capture <a class="anchor" href="#capture" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>create-area-of-business</code></td><td>Make an area of business with its first Phase.</td></tr><tr><td><code>create-phase</code></td><td>Make the next Phase of an area of business.</td></tr><tr><td><code>create-story</code></td><td>Make, or reuse, an area of business and role, and make a story.</td></tr><tr><td><code>create-scenario</code></td><td>Make a Scenario from a JSON file.</td></tr><tr><td><code>refine</code></td><td>Add Scenarios to a story, one question at a time.</td></tr></tbody></table></div>
+<h3 id="change">Change <a class="anchor" href="#change" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>reword</code></td><td>Change the title or meaning of a role, subject, fact, action, parameter or Phase, or a story’s goal or reward, until its Phase is released.</td></tr><tr><td><code>restage-story</code></td><td>Set or clear a story’s stage.</td></tr><tr><td><code>delete</code></td><td>Delete a story, a Scenario, or an unused subject, fact, action or parameter, until its Phase is released.</td></tr><tr><td><code>set-example</code></td><td>Set or remove a parameter’s example, at any time.</td></tr></tbody></table></div>
+<h3 id="read">Read <a class="anchor" href="#read" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>show</code></td><td>List areas of business, or one area of business’s outline.</td></tr><tr><td><code>map</code></td><td>Print the story map.</td></tr><tr><td><code>write</code></td><td>Write a Markdown and an HTML document for each story.</td></tr><tr><td><code>glossary</code></td><td>Write an area of business’s glossary, or all of them with an index.</td></tr><tr><td><code>history</code></td><td>Write the history, Phase by Phase, as linked HTML.</td></tr><tr><td><code>release-notes</code></td><td>Print a released Phase’s notes as Markdown.</td></tr></tbody></table></div>
+<h3 id="work">Work <a class="anchor" href="#work" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>work:create</code></td><td>Open a ticket against a Scenario.</td></tr><tr><td><code>work:list</code></td><td>List a Scenario’s tickets and its colour.</td></tr><tr><td><code>work:status</code></td><td>Move a ticket to to-do, in-progress or done.</td></tr><tr><td><code>work:delete</code></td><td>Delete a ticket.</td></tr></tbody></table></div>
+<h3 id="release-and-change">Release and change <a class="anchor" href="#release-and-change" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>release-phase</code></td><td>Release the active Phase once it is proven.</td></tr><tr><td><code>elaborate-story</code></td><td>Open a released story to change in the active Phase.</td></tr><tr><td><code>retire-scenario</code></td><td>Retire a released story’s Scenario through its elaboration.</td></tr><tr><td><code>withdraw-from-elaboration</code></td><td>Undo a change still pending in an elaboration.</td></tr><tr><td><code>record-impact</code></td><td>Record whether a released story delivered its reward.</td></tr><tr><td><code>outstanding-impacts</code></td><td>List released stories whose reward nobody has settled.</td></tr></tbody></table></div>
+<h2 id="other">Commands from the other packages <a class="anchor" href="#other" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>port-generator generate &lt;area-of-business&gt;</code></td><td>Write the Port classes for an area of business.</td></tr><tr><td><code>port-generator check &lt;area-of-business&gt;</code></td><td>Report Ports that are stale or not yet generated.</td></tr><tr><td><code>scenario-bridge run &lt;area-of-business&gt; &lt;scenario&gt;</code></td><td>Run one Scenario, and record the result.</td></tr><tr><td><code>scenario-bridge run-all &lt;area-of-business&gt;</code></td><td>Run every Scenario of an area of business.</td></tr><tr><td><code>wizard-reset</code></td><td>Preview wiping all of Barnspec’s records; <code>--force</code> does it.</td></tr></tbody></table></div>
+<p>The first four are in <a href="prove.html">Prove a Scenario</a>, and <code>wizard-reset</code> in <a href="data.html">Where your data lives</a>.</p>
+        <div class="docs-next"><a href="gui.html">← The browser app</a><a href="data.html">Where your data lives →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

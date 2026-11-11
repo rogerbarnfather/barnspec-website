@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capture stories and Scenarios · Barnspec</title>
+  <meta name="description" content="How to capture stories and Scenarios in the browser app or on the command line, and how to reword, restage and delete them.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html" aria-current="page">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Capture stories and Scenarios</h1>
+        <p class="lede">Write stories and Scenarios down, and change them until their Phase is released.</p>
+<h2 id="story">Capture a story <a class="anchor" href="#story" aria-label="Link to this section">#</a></h2>
+<p>In the browser app, <strong>New story</strong> asks who wants something, what they want to do, why, and where it sits,
+with the sentence building up as you answer. On the command line:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-story --area-of-business=reservations \
+    --area-of-business-meaning="booking and keeping rooms" \
+    --phase="first bookings" --phase-meaning="guests can book a room" \
+    --role=guest --role-meaning="choosing and securing somewhere to stay" \
+    --goal="book a room for a run of nights" --reward="have somewhere to stay" \
+    --stage=transact
+Barn: …/hotel
+Story created:
+  area of business: reservations (created)
+  role: guest (created)
+  story: book-a-room-for-a-run-of-nights (created)
+  stage: transact
+  story id: 01a1cb3e-…</code></pre>
+<p>An area of business, role or Phase that already exists is reused: give its title, and leave out the <code>-meaning</code>
+flags, which are only needed for something new. <code>--phase</code> and <code>--phase-meaning</code> apply only when the area of
+business is new; they default to “Phase 1”. <code>--stage</code> is optional and is one of <code>establish</code>, <code>adjust</code>,
+<code>transact</code>, <code>resolve</code> or <code>close</code>.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-story --area-of-business=reservations --role=guest \
+    --goal="cancel their booking" --reward="are not held to a stay they will not take" \
+    --stage=resolve
+Barn: …/hotel
+Story created:
+  area of business: reservations (existing)
+  role: guest (existing)
+  story: cancel-their-booking (created)
+  stage: resolve
+  story id: 01a1cb3e-…</code></pre>
+<h3 id="area">An area of business on its own <a class="anchor" href="#area" aria-label="Link to this section">#</a></h3>
+<p>To make an area of business and its first Phase before any story, and to add the next Phase later:</p>
+<pre><code>vendor/bin/barnspec create-area-of-business --title=Laundry --meaning="washing and returning linen" \
+    --phase="first loads" --phase-meaning="linen goes out and comes back"
+vendor/bin/barnspec create-phase --area-of-business=laundry --title="..." --meaning="..."</code></pre>
+<aside class="callout note"><p><strong>Note.</strong> A new Phase can only be made once the active one is released. See <a href="phases.html">Phases, releasing and changing</a>.</p></aside>
+<h2 id="scenario">Capture a Scenario <a class="anchor" href="#scenario" aria-label="Link to this section">#</a></h2>
+<p>In the browser app, <strong>New story</strong> offers to write the story’s happy path straight away, and
+<strong>+ New Scenario</strong> on a story starts at the When. Nothing is saved until you save, and any new building block you
+describe on the way is created only then.</p>
+<p>On the command line there are two ways. <code>refine</code> is a wizard for a person at a terminal. It asks which area of
+business, role and story, then walks through the Scenario one question at a time, offering to reuse each existing subject, fact and
+action or to make a new one.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec refine
+Barn: …/hotel
+
+Select an area of business:
+
+[0] - reservations
+[1] - Quit
+
+&gt;</code></pre>
+<p>For a script, an AI agent or a seed file, <code>create-scenario</code> takes the whole Scenario as JSON, so nothing
+is interactive. Subjects, facts, actions and parameters are found or created as <code>refine</code> would; only the area of business,
+role and story must already exist.</p>
+<pre><code>{
+    "area-of-business": "reservations",
+    "role": "guest",
+    "story": "book-a-room-for-a-run-of-nights",
+    "actionSentence": "book a room for three nights",
+    "actionParameters": {
+        "nights": {"meaning": "how many nights to stay", "type": "integer", "value": 3}
+    },
+    "given": [
+        {
+            "subject": "room",
+            "subjectMeaning": "a room the hotel lets to guests",
+            "fact": "is-available",
+            "factMeaning": "no booking holds the room on those nights"
+        }
+    ],
+    "outcome": "accepted",
+    "then": [
+        {
+            "subject": "booking",
+            "subjectMeaning": "a guest's hold on a room for a run of nights",
+            "fact": "is-confirmed",
+            "factMeaning": "holds the room for the guest on these nights"
+        }
+    ]
+}</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-scenario --file=scenario.json
+Barn: …/hotel
+Scenario saved: 01a1cb3e-…</code></pre>
+<div class="table-wrap"><table><thead><tr><th scope="col">Key</th><th scope="col">Meaning</th></tr></thead><tbody><tr><td><code>area-of-business</code>, <code>role</code>, <code>story</code></td><td>Where the Scenario goes, by slug. They must already exist.</td></tr><tr><td><code>actionSentence</code></td><td>The action, in words that finish “they will now…”.</td></tr><tr><td><code>actionParameters</code></td><td>Details the action takes: each has a <code>meaning</code>, a <code>type</code> and a <code>value</code> for this Scenario.</td></tr><tr><td><code>given</code>, <code>then</code></td><td>Lists of facts. Each names a <code>subject</code> and <code>fact</code>, with <code>subjectMeaning</code> and <code>factMeaning</code> when they are new, and <code>parameters</code> if the fact takes any.</td></tr><tr><td><code>outcome</code></td><td><code>accepted</code> or <code>rejected</code>: what the role expects to happen.</td></tr></tbody></table></div>
+<p>A fact with no parameters is written the same way with <code>parameters</code> left out.</p>
+<h2 id="change">Change what you captured <a class="anchor" href="#change" aria-label="Link to this section">#</a></h2>
+<p>Until a Phase is released, everything in it can change, because the first wording is rarely the right one. Once it is
+released, a story changes only by <a href="phases.html#elaborate">elaboration</a>.</p>
+<h3 id="reword">Reword <a class="anchor" href="#reword" aria-label="Link to this section">#</a></h3>
+<p>Reword a role, story, subject, fact, action, parameter or Phase. Give the new title or meaning, or a story’s new goal or reward.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec reword --area-of-business=reservations --story=book-a-room \
+    --goal="book a room for a run of nights"
+Barn: …/hotel
+Reworded story 'book-a-room' of role 'guest':
+  goal was: book a room
+  goal now: book a room for a run of nights</code></pre>
+<h3 id="restage">Restage <a class="anchor" href="#restage" aria-label="Link to this section">#</a></h3>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec restage-story --area-of-business=reservations \
+    --story=book-a-room-for-a-run-of-nights --stage=transact
+Barn: …/hotel
+Restaged book-a-room-for-a-run-of-nights: transact</code></pre>
+<p>Add <code>--clear</code> instead of <code>--stage</code> to return a story to Unassigned.</p>
+<h3 id="delete">Delete <a class="anchor" href="#delete" aria-label="Link to this section">#</a></h3>
+<p>Delete a story with its Scenarios, a single Scenario, or a subject, fact, action or parameter that no Scenario uses. Barnspec
+says what it would delete and does nothing until you agree; pass <code>--yes</code> to agree without being asked.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec delete --area-of-business=reservations \
+    --story=book-a-room-for-a-run-of-nights
+Barn: …/hotel
+This deletes story 'book-a-room-for-a-run-of-nights' of role 'guest'.
+Nothing was deleted. Pass --yes to go ahead without being asked.</code></pre>
+<aside class="callout warning"><p><strong>Warning.</strong> Deleting cannot be undone. A building block that a Scenario uses can be reworded but not deleted, and a subject can be deleted once it has no facts.</p></aside>
+<h3 id="examples">Examples <a class="anchor" href="#examples" aria-label="Link to this section">#</a></h3>
+<p>A parameter can carry an example, shown on the glossary. It changes nothing that was released, so it can be set at any time, even after release. An empty example removes it.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec set-example --area-of-business=reservations \
+    --action=book-a-room-for-three-nights --parameter=nights --example=3
+Barn: …/hotel
+Set the example of parameter 'nights' of action 'book-a-room-for-three-nights':
+  example was: (none)
+  example now: 3</code></pre>
+        <div class="docs-next"><a href="model.html">← The model</a><a href="read.html">Read what you captured →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

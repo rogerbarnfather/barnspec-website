@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prove a Scenario · Barnspec</title>
+  <meta name="description" content="Prove a Barnspec Scenario: open a ticket, generate and fill in Ports, run the Scenario and watch it turn green.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html" aria-current="page">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Prove a Scenario</h1>
+        <p class="lede">A Scenario turns green when a real run passes, and for no other reason.</p>
+<p>Barnspec never takes anyone’s word that a story is done. A Scenario turns green only when a real run against your
+software passes. This page takes a Scenario from nothing to green. The commands were run, in order, in the hotel example.</p>
+<h2 id="colours">How a Scenario gets its colour <a class="anchor" href="#colours" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Colour</th><th scope="col">When</th></tr></thead><tbody><tr><td>Yellow</td><td>Some ticket for the Scenario is not done.</td></tr><tr><td>Green</td><td>Every ticket is done, and the last run passed.</td></tr><tr><td>Red</td><td>Every ticket is done, but the Scenario has never been run, or its last run failed.</td></tr><tr><td>No colour</td><td>It has no ticket and no run: nothing has been claimed about it yet.</td></tr></tbody></table></div>
+<p>A story’s colour is rolled up from its Scenarios. It is green when every Scenario is green, red when every Scenario is red or
+green and at least one is red, and yellow otherwise. A story with no Scenario has no colour, and no ticket can be opened against it.</p>
+<p>No command and no button marks a Scenario green. A result never expires on a clock: nothing turns green because time passed,
+and a result is replaced only by a later run. Opening a new ticket on a green Scenario drops it back to yellow and discards its
+last run, because the evidence predates the new work.</p>
+<h2 id="ticket">Open a ticket <a class="anchor" href="#ticket" aria-label="Link to this section">#</a></h2>
+<p>A ticket tracks one piece of work against one Scenario. It needs a title and a description. The reference is
+optional, for a ticket in another system.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:create reservations book-a-room-for-a-run-of-nights \
+    book-a-room-for-three-nights --title="Book a room" \
+    --description="Let a guest hold a free room" --reference=HOTEL-1
+Barn: …/hotel
+Created work ticket 01a1cb3e-… for scenario 01a1cb3e-…: Book a room</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:list reservations book-a-room-for-a-run-of-nights \
+    book-a-room-for-three-nights
+Barn: …/hotel
+Scenario: book a room for three nights — yellow
+  id: 01a1cb3e-…
+Not yet run — prove it with `scenario-bridge run`; until then it stays red.
+01a1cb3e-…  To do  Book a room  [HOTEL-1]</code></pre>
+<p>The arguments are the area of business, the story and the Scenario. The Scenario is yellow while its ticket is open.</p>
+<h2 id="ports">Say how to run it <a class="anchor" href="#ports" aria-label="Link to this section">#</a></h2>
+<p>A Scenario is run against <a href="glossary.html#port">Ports</a>: small classes you fill in that connect its words to your software. Two
+more Composer packages generate and run them:</p>
+<pre><code><span class="p">$ </span>composer require --dev rmb32/port-generator rmb32/scenario-bridge</code></pre>
+<p>Tell the generator where to put the Ports, in <code>.barn/barnspec/settings.json</code>, and make sure Composer can load
+them (here, by adding <code>"autoload-dev": {"psr-4": {"App\\Tests\\": "tests/"}}</code> to your <code>composer.json</code> and running
+<code>composer dump-autoload</code>):</p>
+<pre><code>{"portStubs": {"directory": "tests/Spec/Port", "namespace": "App\\Tests\\Spec\\Port"}}</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/port-generator generate reservations
+Wrote: …/hotel/tests/Spec/Port/Reservations/Fact/Room/IsAvailableArrange.php
+Wrote: …/hotel/tests/Spec/Port/Reservations/Fact/Room/IsAvailableAssert.php
+Wrote: …/hotel/tests/Spec/Port/Reservations/Fact/Booking/IsConfirmedArrange.php
+Wrote: …/hotel/tests/Spec/Port/Reservations/Fact/Booking/IsConfirmedAssert.php
+Wrote: …/hotel/tests/Spec/Port/Reservations/Action/BookARoomForThreeNights.php
+Wrote: …/hotel/tests/Spec/Port/Reservations/Role/GuestAuthenticator.php
+Done — 6 written, 0 skipped (already existed).</code></pre>
+<p>One class is written for each fact (to set it up, and to check it), each action and each role. Until you fill them in,
+each one throws “TODO”, and a run says so:</p>
+<pre><code><span class="p">$ </span>vendor/bin/scenario-bridge run reservations book-a-room-for-three-nights
+- Scenario: They will now book a room for three nights:
+        💥 When they book a room for three nights they expect it to be accepted but the Scenario crashed authenticating as guest: RuntimeException: TODO: implement App\Tests\Spec\Port\Reservations\Role\GuestAuthenticator::authenticate()
+Recorded this run against the Scenario (failed).</code></pre>
+<p>A failed run is recorded too. Now fill the classes in with your real software. The action, for instance, is what the
+guest does:</p>
+<pre><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Tests\Spec\Port\Reservations\Action;
+
+use Override;
+use Rmb32\ScenarioRunner\Api\Contract\Act;
+use Rmb32\ScenarioRunner\Api\Contract\ReadStorage;
+use Rmb32\ScenarioRunner\Api\Contract\WriteStorage;
+use Rmb32\ScenarioRunner\Api\ValueObject\AreaOfBusiness\Role\Story\Scenario\Action\ActionData;
+use Rmb32\ScenarioRunner\Api\ValueObject\AreaOfBusiness\Role\Story\Scenario\Action\OutcomeData;
+
+final class BookARoomForThreeNights implements Act
+{
+    #[Override]
+    public function act(ActionData $action, ReadStorage $readStorage, WriteStorage $writeStorage): OutcomeData
+    {
+        $nights = $action-&gt;argumentFor('nights')-&gt;value;
+
+        if ($readStorage-&gt;retrieve('room')['booked']) {
+            return OutcomeData::Rejected;
+        }
+
+        $writeStorage-&gt;store(['confirmed' =&gt; true, 'nights' =&gt; $nights], 'booking');
+
+        return OutcomeData::Accepted;
+    }
+}</code></pre>
+<p>The Ports fill in four things. <strong>Arrange</strong> sets up a Given fact. <strong>Act</strong> performs the action
+and reports whether it was accepted or rejected. <strong>Assert</strong> checks a Then fact. <strong>Authenticate</strong> signs in as
+the role. In this example they use a small in-memory store; in a real project they call your application.</p>
+<h2 id="run">Run it <a class="anchor" href="#run" aria-label="Link to this section">#</a></h2>
+<pre><code><span class="p">$ </span>vendor/bin/scenario-bridge run reservations book-a-room-for-three-nights
+- Scenario: They will now book a room for three nights:
+        ► RoomIsAvailable()
+        ✅ When they book a room for three nights they expect it to be accepted and it was accepted
+        ✅ they expect that BookingIsConfirmed()
+Recorded this run against the Scenario (passed).</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:list reservations book-a-room-for-a-run-of-nights \
+    book-a-room-for-three-nights
+Barn: …/hotel
+Scenario: book a room for three nights — yellow
+  id: 01a1cb3e-…
+Last run passed at 2026-11-11T15:34:00+00:00.
+01a1cb3e-…  To do  Book a room  [HOTEL-1]</code></pre>
+<p>The run passed, but the ticket is still open, so the Scenario is still yellow. Move the ticket on:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:status reservations &lt;ticket-id&gt; in-progress
+Barn: …/hotel
+Ticket 01a1cb3e-… moved to In progress</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:status reservations &lt;ticket-id&gt; done
+Barn: …/hotel
+Ticket 01a1cb3e-… moved to Done</code></pre>
+<p>The status is <code>to-do</code>, <code>in-progress</code> or <code>done</code>. With the ticket done and the run passed:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec work:list reservations book-a-room-for-a-run-of-nights \
+    book-a-room-for-three-nights
+Barn: …/hotel
+Scenario: book a room for three nights — green
+  id: 01a1cb3e-…
+Last run passed at 2026-11-11T15:34:00+00:00.
+01a1cb3e-…  Done  Book a room  [HOTEL-1]</code></pre>
+<p>Green. Only the passing run made it so.</p>
+<h3 id="run-all">Run every Scenario of an area of business <a class="anchor" href="#run-all" aria-label="Link to this section">#</a></h3>
+<p><code>run-all</code> runs them all, signing in as each role first. <code>--summary</code> prints a count and
+<code>--xml-report=build/report.xml</code> writes a report for CI. Both commands also take <code>--no-record</code>, to try a
+Scenario out without changing its colour.</p>
+<pre><code><span class="p">$ </span>vendor/bin/scenario-bridge run-all reservations --summary
+1 passed, 0 failed, 1 total
+Recorded 1 scenario run(s) against Work.</code></pre>
+<h3 id="stale">When the vocabulary changes <a class="anchor" href="#stale" aria-label="Link to this section">#</a></h3>
+<p>If you reword or delete a fact or action after generating Ports, <code>check</code> reports the Ports that no longer match, or that have not been generated yet:</p>
+<pre><code><span class="p">$ </span>vendor/bin/port-generator check reservations
+Nothing stale — every generated stub matches the captured vocabulary.</code></pre>
+<h2 id="delete-ticket">Scrap a ticket <a class="anchor" href="#delete-ticket" aria-label="Link to this section">#</a></h2>
+<p><code>vendor/bin/barnspec work:delete reservations &lt;ticket-id&gt;</code> removes a ticket at any time. The runs stay, so
+deleting a done ticket changes no colour. Releasing a Phase deletes the done tickets of Scenarios that have been run; tickets are
+disposable.</p>
+        <div class="docs-next"><a href="read.html">← Read what you captured</a><a href="phases.html">Phases, releasing and changing →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation · Barnspec</title>
+  <meta name="description" content="Barnspec documentation: the model, capturing, reading and proving stories, releasing Phases, the browser app and the command line.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html" aria-current="page">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Documentation</h1>
+        <p class="lede">Everything Barnspec does, task by task.</p>
+<p>The documentation is organised by what you are trying to do. Start with <a href="model.html">the model</a> if
+the words are new, or the <a href="../quick-start.html">quick start</a> if you would rather try it first.</p>
+<h2 id="start">Start <a class="anchor" href="#start" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="model.html">The model</a>: areas of business, roles, stories, Scenarios and Phases, and how they fit together.</li></ul>
+<h2 id="tasks">Tasks <a class="anchor" href="#tasks" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="capture.html">Capture stories and Scenarios</a>: write them down, reword them and delete them.</li><li><a href="read.html">Read what you captured</a>: the map, story documents, the glossary, the history and release notes.</li><li><a href="prove.html">Prove a Scenario</a>: tickets, the generated checks, and how a Scenario turns green.</li><li><a href="phases.html">Phases, releasing and changing</a>: release a slice, change a released story and record impact.</li></ul>
+<h2 id="tools">Tools <a class="anchor" href="#tools" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="gui.html">The browser app</a>: everything above, in a browser.</li><li><a href="cli.html">Command reference</a>: every command, in one table.</li><li><a href="data.html">Where your data lives</a>: the files Barnspec writes, and how to start over.</li></ul>
+<h2 id="reference">Reference <a class="anchor" href="#reference" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="glossary.html">Glossary</a>: every term, in alphabetical order.</li><li><a href="troubleshooting.html">When something goes wrong</a>: the messages you will meet and what to do.</li></ul>
+<h2 id="two-ways">Two ways to do everything <a class="anchor" href="#two-ways" aria-label="Link to this section">#</a></h2>
+<p>Everything in Barnspec can be done in the browser app or on the command line, and both write the same records. The
+app is the way for a person to write a story: it asks one plain question at a time. The command line is the way for a script, a
+seed file, CI or an AI agent, since it takes flags or a JSON file and never prompts. A few steps, such as running Scenarios,
+are command-line only because there is no judgement call to make.</p>
+<p>The examples in these pages use a hotel, and the commands were run for real in a new folder with the released
+packages. A command is written <code>vendor/bin/barnspec</code>; <a href="cli.html#shorter">the command reference</a> shows shorter ways to type it.</p>
+        <div class="docs-next"><span></span><a href="model.html">The model →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

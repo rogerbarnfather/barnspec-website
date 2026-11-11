@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossary · Barnspec</title>
+  <meta name="description" content="The Barnspec glossary: every term, in alphabetical order.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html" aria-current="page">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Glossary</h1>
+        <p class="lede">One word, one meaning.</p>
+<p>Every term Barnspec uses, in alphabetical order. A word means one thing across this whole site, and matches the words in the browser app and on the command line.</p>
+<dl class="glossary">
+<dt id="action">Action</dt><dd>What a role does, in words that finish “they will now…”: <em>book a room for three nights</em>. An action is a building block, defined once and reused. It can take parameters.</dd>
+<dt id="area-of-business">Area of business</dt><dd>A distinct part of what the business does, named in your own words with a meaning that says what it covers. It holds roles, building blocks and Phases. Never shortened.</dd>
+<dt id="barn">Barn</dt><dd>A project with a <code>.barn/</code> folder at its root, where Barnspec keeps its records.</dd>
+<dt id="building-block">Building block</dt><dd>A subject, fact, action or parameter: the shared words a Scenario is written in, each defined once and reused.</dd>
+<dt id="colour">Colour</dt><dd>A Scenario or story’s fulfilment: yellow, red or green, or none. Worked out from tickets and runs, never set by hand.</dd>
+<dt id="elaboration">Elaboration</dt><dd>The way a released story changes: the story is opened in the Phase being built now, where Scenarios are added, amended or retired and its wording can change. It is merged into the story when that Phase is released.</dd>
+<dt id="example">Example</dt><dd>A sample value for a parameter, shown beside its meaning in the glossary. It can be set or removed at any time.</dd>
+<dt id="fact">Fact</dt><dd>Something that can be true of a subject, such as <em>is available</em>. Scenarios use facts in their Given and Then. A fact is a building block and can take parameters.</dd>
+<dt id="goal">Goal</dt><dd>What a story’s role wants to do. It finishes “wants to…”.</dd>
+<dt id="impact">Impact</dt><dd>Whether a released story delivered its reward, recorded per Phase the story shipped in as <em>evaluating</em>, <em>achieved</em>, <em>none</em> or <em>superseded</em>. It never changes the story’s colour.</dd>
+<dt id="outcome">Outcome</dt><dd>Whether a Scenario’s action is expected to be accepted or rejected.</dd>
+<dt id="parameter">Parameter</dt><dd>A detail a fact or action takes, with a type. Each Scenario gives it a value, and it can carry an example.</dd>
+<dt id="phase">Phase</dt><dd>A slice of work: a small, whole piece of value built end to end. An area of business has one being built and any number released. Releasing locks it.</dd>
+<dt id="port">Port</dt><dd>A small class, generated and then filled in by you, that connects one word of a Scenario to your software so it can be run: to set up a fact, check a fact, perform an action or sign in as a role.</dd>
+<dt id="release">Release</dt><dd>The one lock point of a Phase. It happens only when every story in the Phase is proven, and afterwards its stories change only by elaboration.</dd>
+<dt id="reward">Reward</dt><dd>Why a story matters to its role. It finishes “so they…”.</dd>
+<dt id="role">Role</dt><dd>A kind of person within an area of business, with a meaning that says what they are responsible for. Stories belong to roles.</dd>
+<dt id="run">Run</dt><dd>Running a Scenario against your software. A passing run is the only thing that turns a Scenario green, and it is recorded until a later run replaces it.</dd>
+<dt id="scenario">Scenario</dt><dd>One concrete case of a story: <strong>given</strong> facts that hold at the start, <strong>when</strong> the role takes an action and expects it to be accepted or rejected, <strong>then</strong> facts that hold afterwards.</dd>
+<dt id="stage">Stage</dt><dd>Where in a role’s dealings with the business a story sits: establish, adjust, transact, resolve or close. Optional. A story without one is Unassigned.</dd>
+<dt id="story">Story</dt><dd>What a role wants to do and why, told in the third person: the role wants to <em>goal</em>, so they <em>reward</em>. It belongs to one Phase.</dd>
+<dt id="subject">Subject</dt><dd>A thing the business reasons about, such as a room or a booking. It has a meaning and holds facts. A subject is a building block.</dd>
+<dt id="ticket">Ticket</dt><dd>A unit of work tracked against one Scenario, with a title, a description and a status of to-do, in-progress or done. Tickets are disposable.</dd>
+</dl>
+        <div class="docs-next"><a href="data.html">← Where your data lives</a><a href="troubleshooting.html">When something goes wrong →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

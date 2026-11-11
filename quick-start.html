@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick start · Barnspec</title>
+  <meta name="description" content="Install Barnspec, capture a first story and a Scenario, and see them on the story map.">
+  <link rel="icon" href="assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/base/base.css">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="philosophy.html">Philosophy</a></li>
+          <li><a href="quick-start.html" aria-current="page">Quick start</a></li>
+          <li><a href="docs/index.html">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="wrap prose">
+        <h1>Quick start</h1>
+        <p class="lede">From an empty project to a story on the map.</p>
+<p>You need PHP 8.5 or later and Composer. Every command on this page was run in a new folder, with a
+hotel as the example, and the output shown is what it printed. It takes about ten minutes.</p>
+<h2 id="install">Install <a class="anchor" href="#install" aria-label="Link to this section">#</a></h2>
+<p>Barnspec is three Composer packages. <a href="https://packagist.org/packages/rmb32/barnspec">barnspec</a> is
+the library, <a href="https://packagist.org/packages/rmb32/barnspec-cli">barnspec-cli</a> provides the
+<code>vendor/bin/barnspec</code> command, and <a href="https://packagist.org/packages/rmb32/barnspec-gui">barnspec-gui</a>
+adds the browser app. From your project’s root:</p>
+<pre><code><span class="p">$ </span>composer require --dev rmb32/barnspec rmb32/barnspec-cli rmb32/barnspec-gui</code></pre>
+<h2 id="make-a-barn">Make a barn <a class="anchor" href="#make-a-barn" aria-label="Link to this section">#</a></h2>
+<p>Barnspec keeps what you capture in a folder called <code>.barn/</code> at the root of the project. <code>init</code> makes it.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec init
+Made a barn: …/hotel
+Barnspec keeps its spec in: …/hotel/.barn/barnspec</code></pre>
+<p>Commit <code>.barn/</code> with your code: it is the specification. Barnspec finds it from any folder inside the project.</p>
+<h2 id="capture-a-story">Capture a story <a class="anchor" href="#capture-a-story" aria-label="Link to this section">#</a></h2>
+<p>A story says who wants something and why, in one sentence: the <strong>role</strong> wants to
+<strong>goal</strong>, so they <strong>reward</strong>. Roles belong to an <dfn><a href="docs/glossary.html#area-of-business">area of
+business</a></dfn>, a distinct part of what the business does. The first story creates the area of business, its role and its first
+<a href="docs/glossary.html#phase">Phase</a> (a slice of work).</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-story --area-of-business=reservations \
+    --area-of-business-meaning="booking and keeping rooms" \
+    --phase="first bookings" --phase-meaning="guests can book a room" \
+    --role=guest --role-meaning="choosing and securing somewhere to stay" \
+    --goal="book a room for a run of nights" --reward="have somewhere to stay" \
+    --stage=transact
+Barn: …/hotel
+Story created:
+  area of business: reservations (created)
+  role: guest (created)
+  story: book-a-room-for-a-run-of-nights (created)
+  stage: transact
+  story id: 01a1cb3e-…</code></pre>
+<p>The stage says where in a guest’s dealings with the hotel the story sits. It is optional. A second story reuses the same area of business and role, so it only needs the new words:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-story --area-of-business=reservations --role=guest \
+    --goal="cancel their booking" --reward="are not held to a stay they will not take" \
+    --stage=resolve
+Barn: …/hotel
+Story created:
+  area of business: reservations (existing)
+  role: guest (existing)
+  story: cancel-their-booking (created)
+  stage: resolve
+  story id: 01a1cb3e-…</code></pre>
+<p>IDs are shortened here with “…”; yours will be longer.</p>
+<h2 id="add-a-scenario">Add a Scenario <a class="anchor" href="#add-a-scenario" aria-label="Link to this section">#</a></h2>
+<p>A <a href="docs/glossary.html#scenario">Scenario</a> pins a story down with one concrete case: <em>given</em> how
+things stand, <em>when</em> the role does something, <em>then</em> what holds afterwards. Save this as <code>scenario.json</code>:</p>
+<pre><code>{
+    "area-of-business": "reservations",
+    "role": "guest",
+    "story": "book-a-room-for-a-run-of-nights",
+    "actionSentence": "book a room for three nights",
+    "actionParameters": {
+        "nights": {"meaning": "how many nights to stay", "type": "integer", "value": 3}
+    },
+    "given": [
+        {
+            "subject": "room",
+            "subjectMeaning": "a room the hotel lets to guests",
+            "fact": "is-available",
+            "factMeaning": "no booking holds the room on those nights"
+        }
+    ],
+    "outcome": "accepted",
+    "then": [
+        {
+            "subject": "booking",
+            "subjectMeaning": "a guest's hold on a room for a run of nights",
+            "fact": "is-confirmed",
+            "factMeaning": "holds the room for the guest on these nights"
+        }
+    ]
+}</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec create-scenario --file=scenario.json
+Barn: …/hotel
+Scenario saved: 01a1cb3e-…</code></pre>
+<p>Each new word, such as <code>room</code> or <code>is-available</code>, is given its meaning the first time it
+appears and is reused from then on.</p>
+<aside class="callout note"><p><strong>Note.</strong> For a person at a keyboard, <code>vendor/bin/barnspec refine</code> asks for the same things one question at a time. The browser app does too.</p></aside>
+<h2 id="see-what-you-have">See what you have <a class="anchor" href="#see-what-you-have" aria-label="Link to this section">#</a></h2>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec show reservations
+Barn: …/hotel
+reservations — booking and keeping rooms
+
+  role: guest — choosing and securing somewhere to stay
+    story: wants to book a room for a run of nights, so that they have somewhere to stay [transact]
+      phase: first-bookings
+      scenario: book-a-room-for-three-nights
+    story: wants to cancel their booking, so that they are not held to a stay they will not take [resolve]
+      phase: first-bookings
+
+  subject: room — a room the hotel lets to guests
+    fact: is-available — no booking holds the room on those nights
+
+  subject: booking — a guest's hold on a room for a run of nights
+    fact: is-confirmed — holds the room for the guest on these nights
+
+  action: book a room for three nights
+      parameter: nights (integer) — how many nights to stay</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec map --area-of-business=reservations
+Barn: …/hotel
+Story map — reservations
+
+Establish
+  (no stories)
+
+Adjust
+  (no stories)
+
+Act
+  The guest
+    - wants to book a room for a run of nights, so they have somewhere to stay (planned)
+
+Follow Up
+  The guest
+    - wants to cancel their booking, so they are not held to a stay they will not take (planned)
+
+Terminate
+  (no stories)</code></pre>
+<p>The map lists every story once, under the stage it sits at. Both stories read “planned” because their Phase has not been released. To turn each story into a readable document:</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec write reservations --output-dir=docs/stories
+Barn: …/hotel
+Wrote: docs/stories/book-a-room-for-a-run-of-nights.md
+Wrote: docs/stories/book-a-room-for-a-run-of-nights.html
+Wrote: docs/stories/cancel-their-booking.md
+Wrote: docs/stories/cancel-their-booking.html</code></pre>
+<pre><code><span class="p">$ </span>cat docs/stories/book-a-room-for-a-run-of-nights.md
+# book a room for a run of nights
+
+**The** guest
+**Wants to** book a room for a run of nights
+**So they** have somewhere to stay
+
+**Stage** transact — The role completes the exchange the area of business exists for: pays, places the order, submits, publishes.
+
+## Scenarios
+
+### book a room for three nights
+
+**Given**
+- no booking holds the room on those nights
+
+**When**
+- they book a room for three nights (nights=3) — expected to be accepted
+
+**Then**
+- holds the room for the guest on these nights</code></pre>
+<h2 id="open-the-browser-app">Open the browser app <a class="anchor" href="#open-the-browser-app" aria-label="Link to this section">#</a></h2>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec gui</code></pre>
+<p>This serves the barn on your own machine and opens it in your browser; stop it with Ctrl-C. It lists the areas of
+business, and opening <em>reservations</em> shows the same story map with a card for each story. The
+<a href="docs/gui.html">browser app</a> page covers the rest.</p>
+<h2 id="where-next">Where next <a class="anchor" href="#where-next" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="docs/prove.html">Prove a Scenario</a>: open a ticket, run the Scenario against your real software and watch it turn green.</li><li><a href="docs/phases.html">Phases, releasing and changing</a>: how a slice of work is released, and how a released story changes.</li><li><a href="philosophy.html">Philosophy</a>: why stories are written this way.</li></ul>
+<p class="in-barn-left">Used in Barn: in a <a href="https://rogerbarnfather.github.io/barn-website/barn.html">barn</a>, Barnspec is the Spec tab. <code>barnspec init</code> makes any project a barn so Barnspec can work on its own.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Introduction</a>
+        <a href="philosophy.html">Philosophy</a>
+        <a href="quick-start.html" aria-current="page">Quick start</a>
+        <a href="docs/index.html">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

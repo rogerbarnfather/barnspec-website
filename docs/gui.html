@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The browser app · Barnspec</title>
+  <meta name="description" content="The Barnspec browser app: starting it, the tabs, the story map, History, writing stories, the Work board and impact.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html" aria-current="page">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>The browser app</h1>
+        <p class="lede">Everything the command line does, for people who would rather click than type.</p>
+<h2 id="start">Start it <a class="anchor" href="#start" aria-label="Link to this section">#</a></h2>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec gui</code></pre>
+<p>This serves the barn that holds the current folder, from any folder inside it, and opens it in your browser. Stop it with
+Ctrl-C. The header names the barn. If the folder has no barn yet, the page offers to make one, which adds only <code>.barn/</code>.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Option</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>--port=9000</code></td><td>Prefer this port; the next free one is used if it is taken.</td></tr><tr><td><code>--no-open</code></td><td>Don’t open a browser.</td></tr><tr><td><code>--dry-run</code></td><td>Print what would be started and stop.</td></tr></tbody></table></div>
+<aside class="callout warning"><p><strong>Warning.</strong> The browser app has no sign-in. Run it on your own machine only.</p></aside>
+<h2 id="tabs">Finding your way around <a class="anchor" href="#tabs" aria-label="Link to this section">#</a></h2>
+<p>Opening an area of business shows its tabs, in the order the work goes: <strong>Building blocks</strong>, <strong>Story map</strong>,
+<strong>History</strong> and <strong>Work</strong>. <strong>Glossary</strong> sits apart on the right, because it is a reference to look
+something up in, not a view to work in. Every page has a breadcrumb trail, and the area of business’s name in it opens the Glossary.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Tab</th><th scope="col">What it is for</th></tr></thead><tbody><tr><td>Building blocks</td><td>The roles, subjects, facts, actions and parameters every story is built from, and the only place they are created. It opens on three groups (Roles, Subjects, Actions) and goes down a level at a time.</td></tr><tr><td>Story map</td><td>Every story once, as it reads now, under its stage and grouped by role. It changes nothing; phases and releasing are on History.</td></tr><tr><td>History</td><td>The map Phase by Phase: where stories are written and released.</td></tr><tr><td>Work</td><td>Tickets. It goes down from roles to stories to Scenarios to the board.</td></tr><tr><td>Glossary</td><td>The area of business’s own vocabulary.</td></tr></tbody></table></div>
+<h3 id="map">The story map <a class="anchor" href="#map" aria-label="Link to this section">#</a></h3>
+<p>Each story is a card with its role’s colour. Filters keep chosen roles, or stories with a Scenario about a subject.
+A story changed by a released elaboration says <em>Elaborated</em> and shows its new wording; one whose Phase isn’t released is dashed and
+says <em>Planned</em>. Clicking a story’s wording opens its Scenarios.</p>
+<h3 id="history">History <a class="anchor" href="#history" aria-label="Link to this section">#</a></h3>
+<p>Columns are the five stages plus Unassigned; rows are Phases, newest on top. A role list above the grid has a tick
+box for showing its stories and a link to the role’s own page. Each story card carries a status icon, and the key sits above the grid:</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Status</th><th scope="col">Meaning</th></tr></thead><tbody><tr><td>Rough</td><td>No Scenarios yet: the story is still only a sentence.</td></tr><tr><td>Expressed</td><td>Refined into concrete Scenarios, with no ticket or run yet.</td></tr><tr><td>In progress</td><td>Some Scenario still has open tickets, or none at all.</td></tr><tr><td>Built, not proven</td><td>No ticket is open, but a passing run has yet to prove every Scenario.</td></tr><tr><td>Fulfilled</td><td>Proven by a passing run, never by a click.</td></tr></tbody></table></div>
+<p>Cards start collapsed; click the goal line to open one. Each Phase band says whether it is in progress, ready to release or
+released, and clicking it folds the Phase away. A released Phase starts folded, so the page opens on the Phase being built.
+<strong>Release Phase</strong> appears once every story in the Phase is fulfilled, and lists what it will lock first. A released
+Phase offers <strong>Release notes</strong>.</p>
+<h3 id="new-story">Writing a story <a class="anchor" href="#new-story" aria-label="Link to this section">#</a></h3>
+<p><strong>New story</strong> asks one question at a time while the sentence builds up above it: the role (pick one or describe
+a new one), what they want to do, why, and where it sits. It then asks whether to write the happy path now. <strong>Save the story
+only</strong> stops there. Otherwise it goes on to the Scenario: the When, the Given, the Then and a name. Click any part of the sentence to
+go back to that step. Anything new you describe on the way is listed under <em>Saved with this Scenario</em> and is created only when you
+save, so abandoning leaves nothing behind.</p>
+<p>An unfinished idea can be saved as a <strong>refinement</strong> and resumed later from History. Refinement notes stay
+separate from formal Scenarios and proof.</p>
+<h3 id="changing">Changing and releasing <a class="anchor" href="#changing" aria-label="Link to this section">#</a></h3>
+<p>Until its Phase is released, a story’s page offers <strong>Reword</strong>, its stage and <strong>Delete</strong>, which
+first lists the Scenarios that go with it. A released story shows <em>Released in …</em> in place of the buttons, and an open card
+offers <strong>Elaborate</strong> in the active Phase, which adds a dashed elaboration card and a section on the story’s Scenarios page to
+add, amend, retire or withdraw changes. See <a href="phases.html">Phases, releasing and changing</a>.</p>
+<h3 id="work">Work <a class="anchor" href="#work" aria-label="Link to this section">#</a></h3>
+<p>The board has three columns: To do, In progress and Done. Drag a ticket between them, or use its ← and → buttons, which
+do the same from the keyboard. Above the board is the brief: the story’s sentence and the Scenario’s Given, When and Then, so you can
+check work against it before moving a ticket to Done. Moving a ticket can change colours as you go, but only a passing run can turn a
+Scenario green. A ticket needs a title and a description, and <strong>Delete</strong> removes one after asking.</p>
+<h3 id="gui-impact">Impact <a class="anchor" href="#gui-impact" aria-label="Link to this section">#</a></h3>
+<p>Every card in a released Phase shows an impact beside its status, never instead of it. <strong>Record impact</strong>
+appears on an open card until its impact is settled, and <strong>Release Phase</strong> asks about every earlier story whose reward is still
+unanswered, which you can leave for next time.</p>
+        <div class="docs-next"><a href="phases.html">← Phases, releasing and changing</a><a href="cli.html">Command reference →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

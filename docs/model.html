@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The model · Barnspec</title>
+  <meta name="description" content="The Barnspec model: areas of business, roles, stories with stages, Scenarios and their building blocks, Phases and impact.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html" aria-current="page">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>The model</h1>
+        <p class="lede">The few ideas everything else is built from.</p>
+<h2 id="shape">The shape of a specification <a class="anchor" href="#shape" aria-label="Link to this section">#</a></h2>
+<p>Barnspec describes a business by its needs, as a tree. A specification holds one or more <a href="glossary.html#area-of-business">areas of business</a>.
+Each has <a href="glossary.html#role">roles</a>, and each role has <a href="glossary.html#story">stories</a>. A story is proven by <a href="glossary.html#scenario">Scenarios</a>, which are
+built from shared <a href="glossary.html#building-block">building blocks</a>. Stories are released in <a href="glossary.html#phase">Phases</a>.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Term</th><th scope="col">What it is</th><th scope="col">Example</th></tr></thead><tbody><tr><td>Area of business</td><td>A distinct part of what the business does, with a title and a meaning.</td><td>reservations: booking and keeping rooms</td></tr><tr><td>Role</td><td>A kind of person within an area of business, and what they are responsible for.</td><td>guest: choosing and securing somewhere to stay</td></tr><tr><td>Story</td><td>What a role wants to do (the goal) and why (the reward).</td><td>The guest wants to book a room for a run of nights, so they have somewhere to stay.</td></tr><tr><td>Scenario</td><td>One concrete case of a story: given, when, then.</td><td>Given no booking holds the room, when they book a room for three nights, then the booking is confirmed.</td></tr><tr><td>Phase</td><td>A slice of work. One is being built; earlier ones are released.</td><td>first bookings</td></tr></tbody></table></div>
+<h2 id="areas-and-roles">Areas of business and roles <a class="anchor" href="#areas-and-roles" aria-label="Link to this section">#</a></h2>
+<p>An area of business is named in your own words and says what it covers. It is never shortened: it is an area of
+business everywhere in Barnspec. A role belongs to one area of business and has a meaning of its own, which says what the role is responsible for.</p>
+<h2 id="stories">Stories <a class="anchor" href="#stories" aria-label="Link to this section">#</a></h2>
+<p>A story is told in the third person: “The <em>role</em> wants to <em>goal</em>, so they <em>reward</em>.” Its address is its goal turned into a slug (<code>book-a-room-for-a-run-of-nights</code>). It belongs to one Phase.</p>
+<h3 id="stages">Stages <a class="anchor" href="#stages" aria-label="Link to this section">#</a></h3>
+<p>A story can sit at one stage of the role’s dealings with the business. The five stages are fixed and the same in every
+area of business, so maps line up column for column. A story with no stage is <strong>Unassigned</strong>, a permanent home for
+things that are not about a lifespan, such as reporting or notifications.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Stage</th><th scope="col">Shown on the map as</th><th scope="col">The role…</th></tr></thead><tbody><tr><td><code>establish</code></td><td>Establish</td><td>gains what it needs to take part: signs up, registers, is granted access, or creates the thing later stories act on.</td></tr><tr><td><code>adjust</code></td><td>Adjust</td><td>changes something that already exists without completing the area of business’s core exchange: edits details, reconfigures, corrects a mistake.</td></tr><tr><td><code>transact</code></td><td>Act</td><td>completes the exchange the area of business exists for: pays, places the order, submits, publishes.</td></tr><tr><td><code>resolve</code></td><td>Follow Up</td><td>gets the exchange to a settled state: tracks it, chases it, disputes a charge, claims a refund, asks for help.</td></tr><tr><td><code>close</code></td><td>Terminate</td><td>ends something for good: cancels, closes, deletes, archives.</td></tr></tbody></table></div>
+<p>Set a stage when capturing, or afterwards until the story’s Phase is released.</p>
+<h2 id="scenarios">Scenarios and building blocks <a class="anchor" href="#scenarios" aria-label="Link to this section">#</a></h2>
+<p>A Scenario has a name and three parts. <strong>Given</strong> lists facts that hold at the start. <strong>When</strong> is the
+action the role takes, with an outcome the role expects: accepted or rejected. <strong>Then</strong> lists facts that hold afterwards.
+The words in them are shared building blocks, defined once and reused by every Scenario:</p>
+<ul><li>A <a href="glossary.html#subject">subject</a> is a thing the business reasons about, such as a room or a booking. It has a meaning.</li><li>A <a href="glossary.html#fact">fact</a> is something that can be true of a subject: <em>is available</em>, <em>is confirmed</em>. It has a meaning.</li><li>An <a href="glossary.html#action">action</a> is what a role does: <em>book a room for three nights</em>.</li><li>A <a href="glossary.html#parameter">parameter</a> is a detail a fact or action takes, with a type and a value in each Scenario, such as the number of nights. It can carry an <em>example</em>, shown beside its meaning in the glossary.</li></ul>
+<p>Because every word is defined once, every story and example uses the same word for the same thing, and the glossary Barnspec writes is the business’s own language.</p>
+<h2 id="phases">Phases <a class="anchor" href="#phases" aria-label="Link to this section">#</a></h2>
+<p>A Phase is a small, whole piece of value built from end to end. Each area of business has exactly one Phase being built
+and any number already released. A story belongs to one Phase. A Phase can be released only when every story in it is proven by a
+passing run, and releasing it locks what it holds. <a href="phases.html">Phases, releasing and changing</a> has the details.</p>
+<h2 id="fulfilment">Fulfilment: tickets, runs and colours <a class="anchor" href="#fulfilment" aria-label="Link to this section">#</a></h2>
+<p>Work is tracked as tickets against Scenarios, and proof is a run of the Scenario against the real software. Each
+Scenario has a colour, worked out from those and never set by hand. Each story’s colour is rolled up from its Scenarios. The rules
+are in <a href="prove.html">Prove a Scenario</a>.</p>
+<h2 id="impact">Impact <a class="anchor" href="#impact" aria-label="Link to this section">#</a></h2>
+<p>A released story also records its <strong>impact</strong>: whether doing what it describes delivered its reward. It
+is recorded beside the story’s colour, never instead of it.</p>
+        <div class="docs-next"><a href="index.html">← Overview</a><a href="capture.html">Capture stories and Scenarios →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

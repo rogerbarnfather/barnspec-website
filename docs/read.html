@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Read what you captured · Barnspec</title>
+  <meta name="description" content="Read what you captured: show, the story map, story documents, the glossary, the history and release notes.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html" aria-current="page">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Read what you captured</h1>
+        <p class="lede">See the same specification as a map, documents, a glossary and a history.</p>
+<p>Nothing in this page changes what you captured. Each command reads it and shows it another way. The browser app has the same views.</p>
+<h2 id="show">List and browse <a class="anchor" href="#show" aria-label="Link to this section">#</a></h2>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec show
+Barn: …/hotel
+reservations — booking and keeping rooms</code></pre>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec show reservations
+Barn: …/hotel
+reservations — booking and keeping rooms
+
+  role: guest — choosing and securing somewhere to stay
+    story: wants to book a room for a run of nights, so that they have somewhere to stay [transact]
+      phase: first-bookings
+      scenario: book-a-room-for-three-nights
+    story: wants to cancel their booking, so that they are not held to a stay they will not take [resolve]
+      phase: first-bookings
+
+  subject: room — a room the hotel lets to guests
+    fact: is-available — no booking holds the room on those nights
+
+  subject: booking — a guest's hold on a room for a run of nights
+    fact: is-confirmed — holds the room for the guest on these nights
+
+  action: book a room for three nights
+      parameter: nights (integer) — how many nights to stay</code></pre>
+<p>Add <code>--json</code> for the same outline as JSON, for scripts.</p>
+<h2 id="map">The story map <a class="anchor" href="#map" aria-label="Link to this section">#</a></h2>
+<p>Every story once, as it reads now, under its stage and grouped by role. A story whose Phase is not released yet is
+marked planned, and a story changed by a released elaboration shows its new wording.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec map --area-of-business=reservations
+Barn: …/hotel
+Story map — reservations
+
+Establish
+  (no stories)
+
+Adjust
+  (no stories)
+
+Act
+  The guest
+    - wants to book a room for a run of nights, so they have somewhere to stay (planned)
+
+Follow Up
+  The guest
+    - wants to cancel their booking, so they are not held to a stay they will not take (planned)
+
+Terminate
+  (no stories)</code></pre>
+<p><code>--role</code> (repeatable) keeps only those roles, and <code>--subject</code> keeps only stories with a Scenario whose Given or Then is about that subject.</p>
+<h2 id="write">A document for each story <a class="anchor" href="#write" aria-label="Link to this section">#</a></h2>
+<p>One Markdown file and one HTML page per story, with its goal, reward and every Scenario’s given, when and then.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec write reservations --output-dir=docs/stories
+Barn: …/hotel
+Wrote: docs/stories/book-a-room-for-a-run-of-nights.md
+Wrote: docs/stories/book-a-room-for-a-run-of-nights.html
+Wrote: docs/stories/cancel-their-booking.md
+Wrote: docs/stories/cancel-their-booking.html</code></pre>
+<h2 id="glossary">The glossary <a class="anchor" href="#glossary" aria-label="Link to this section">#</a></h2>
+<p>Every role, subject, fact and action in an area of business, with its meaning, exactly as written and sorted so a word can
+be found at a glance. Nothing is summarised or made up. Parameters show their example beside their meaning.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec glossary reservations --output=docs/glossary.md
+Barn: …/hotel
+Wrote: docs/glossary.md</code></pre>
+<pre><code><span class="p">$ </span>cat docs/glossary.md
+# Glossary: reservations
+
+This area of business focusses on: booking and keeping rooms
+
+## Roles
+
+- **guest** — choosing and securing somewhere to stay
+
+## Subjects
+
+### booking
+
+a guest's hold on a room for a run of nights
+
+- **is-confirmed** — holds the room for the guest on these nights
+
+### room
+
+a room the hotel lets to guests
+
+- **is-available** — no booking holds the room on those nights
+
+## Actions
+
+- book a room for three nights
+  - nights (integer) — how many nights to stay</code></pre>
+<p>To write every area of business at once, leave the area of business out and give a folder instead. This writes a glossary for each, plus an index linking them.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec glossary --output-dir=docs/glossary
+Barn: …/hotel
+Wrote: docs/glossary/glossary-reservations.md
+Wrote: docs/glossary/glossary-reservations.html
+Wrote: docs/glossary/index.md
+Wrote: docs/glossary/index.html</code></pre>
+<h2 id="history">The history <a class="anchor" href="#history" aria-label="Link to this section">#</a></h2>
+<p>The story map Phase by Phase: columns are the five stages (plus Unassigned when anything sits there), rows are Phases with
+the newest at the top. It is written as linked HTML pages.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec history --output-dir=docs/history
+Barn: …/hotel
+Wrote: docs/history/index.html
+Wrote: docs/history/reservations.html</code></pre>
+<p>Each card links to its story document and to the glossary. <code>--stories-dir</code> and <code>--glossary-dir</code> say where those are, relative to the history folder; the defaults are <code>../stories</code> and <code>../glossary</code>.</p>
+<h2 id="release-notes">Release notes <a class="anchor" href="#release-notes" aria-label="Link to this section">#</a></h2>
+<p>A released Phase’s stories, in the wording they had then, with their Scenarios, as Markdown to copy.</p>
+<pre><code><span class="p">$ </span>vendor/bin/barnspec release-notes --area-of-business=reservations --phase="first bookings"
+Barn: …/hotel
+The guest wants to book a room for a run of nights, so they have somewhere to stay:
+  - book a room for three nights</code></pre>
+        <div class="docs-next"><a href="capture.html">← Capture stories and Scenarios</a><a href="prove.html">Prove a Scenario →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

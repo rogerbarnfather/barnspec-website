@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Philosophy · Barnspec</title>
+  <meta name="description" content="Why Barnspec treats a story as a statement of value, allows nothing to turn green without proof and releases one slice at a time.">
+  <link rel="icon" href="assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/base/base.css">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="philosophy.html" aria-current="page">Philosophy</a></li>
+          <li><a href="quick-start.html">Quick start</a></li>
+          <li><a href="docs/index.html">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="wrap prose">
+        <h1>Philosophy</h1>
+        <p class="lede">Why Barnspec works the way it does.</p>
+<p>Barnspec is built on a few decisions. Each one is a refusal of something common in how software
+projects are run, and each shows in how the tool behaves.</p>
+<h2 id="value-outlives-software">If the software disappeared, the value shouldn’t <a class="anchor" href="#value-outlives-software" aria-label="Link to this section">#</a></h2>
+<p>Imagine every line of code, every package and every ticket disappeared overnight. If what is captured in Barnspec
+were good enough, a different team on different technology could rebuild the product, and it would do the same things for the
+same people for the same reasons. That is the test a story has to pass.</p>
+<p>So a story never describes a screen, an interface or a table. It describes a real, ongoing need that a kind of person has.
+Everything else follows from keeping that permanent record apart from the disposable details of how it happens to be built
+today.</p>
+<h2 id="story">A story is a statement of value, not a task <a class="anchor" href="#story" aria-label="Link to this section">#</a></h2>
+<p>A story has three parts: a <strong>role</strong> (a kind of person), a <strong>goal</strong> (what they want to do) and
+a <strong>reward</strong> (why it matters to them). It is always told in the third person: “The guest wants to book a room, so they
+have somewhere to stay.” It is never “As a guest, I want…”. In the first person a story reads like a developer’s guess at a
+user’s diary entry. In the third person it reads like a fact about the business, true whether or not anyone has built it.</p>
+<p>A story has no “closed” or “deleted” state once it is real. It is written, then refined with concrete Scenarios, then
+fulfilled by whatever team and code exist at the time. Fulfilled is not the end: the need doesn’t stop being true because someone
+met it.</p>
+<h2 id="proof">Proof, not sign-off <a class="anchor" href="#proof" aria-label="Link to this section">#</a></h2>
+<p>Nobody can mark a Scenario fulfilled. There is no confirm button and no override. A Scenario turns green only when a
+real run against the real software passes, and stays green only while the next run passes too. Finishing the tickets gets a
+Scenario to red, which means “claimed, not proven”. Green is reserved for evidence.</p>
+<p>That is deliberately uncomfortable. A Scenario nobody has written the checks for can never go green, however finished the work
+feels. The discomfort is the signal working: a colour that said otherwise would only flatter the team.</p>
+<p>Tickets are the opposite kind of thing. They are for the people doing the work, they are meant to finish, and they are
+disposable. A story is never “done” in that sense. It is fulfilled, and then true.</p>
+<h2 id="one-slice">One slice at a time <a class="anchor" href="#one-slice" aria-label="Link to this section">#</a></h2>
+<p>Work happens in slices, which Barnspec calls Phases. There is the one being built and the ones already released.
+There is no backlog and no pile of parked or far-ahead Phases, because only the next slice is understood well enough to plan.
+When the slice is proven, release it and plan the next from what was learned.</p>
+<p>Releasing is the one lock point. Until then everything in the Phase can be reworded, restaged or deleted, because the first
+wording is rarely the right one. After it, what was released stays exactly as it was, so a later change can never be contradicted
+by someone quietly editing what it changes. Barnspec lists what a release will lock before you agree to it, and refuses to
+release a Phase that is not proven.</p>
+<h2 id="elaboration">A released story changes only by elaboration <a class="anchor" href="#elaboration" aria-label="Link to this section">#</a></h2>
+<p>A released story’s record can still turn out wrong or thin: a case was missing, or the business changed its mind. That
+is a change to what the record says, and it deserves the same care as the record. So once a Phase is released, its stories stop
+changing directly. A change is made by <strong>elaborating</strong> the story in the Phase being worked on now, adding,
+amending or retiring Scenarios, and it is planned and proven like any other work.</p>
+<p>Nothing is thrown away. The elaboration keeps what the story said before, so the record can always show how it came to read
+the way it does.</p>
+<h2 id="bugs">A bug is a flaw in the record <a class="anchor" href="#bugs" aria-label="Link to this section">#</a></h2>
+<p>When something was assumed to work and doesn’t, the code usually did what the record asked, and the record asked for the
+wrong thing. A bug ticket sitting beside the specification holds that knowledge somewhere that gets thrown away once the fix
+ships. So the fix starts in the specification: the story is elaborated, the missing case added or the wrong one amended, and the
+work then makes it true.</p>
+<p>A regression is different. There the record was right and a released Scenario that used to pass has stopped passing. Nothing
+needs elaborating. The run fails, and the fix is making it pass again.</p>
+<h2 id="impact">The reward is a promise; its impact is what happened <a class="anchor" href="#impact" aria-label="Link to this section">#</a></h2>
+<p>Scenarios prove that a role can do what it wanted. Nothing in the code can show that doing it gave them somewhere to
+stay, or stopped them phoning the front desk. A story’s <strong>impact</strong> records that, per Phase the story shipped in, as a
+dated, attributed, one-sentence observation: <em>evaluating</em>, <em>achieved</em>, <em>none</em> or <em>superseded</em>.</p>
+<p>Barnspec asks about earlier Phases’ rewards when a Phase is released, but never refuses to release because one is unanswered.
+A sign-off that has to be given gets given. An unanswered reward stays visibly unanswered instead.</p>
+<p>Impact never changes a story’s colour. A story can be green and have delivered no value, two true facts side by side. If
+admitting “none” cost the team its green, nobody would admit it. And only the role, or someone speaking for them, can settle
+“achieved”, because a team cannot close a claim about someone else’s experience.</p>
+<h2 id="refusals">What it refuses to be <a class="anchor" href="#refusals" aria-label="Link to this section">#</a></h2>
+<ul><li>A backlog, an estimate or a ceremony. There is one Phase to build and nothing to size.</li><li>A place to sign work off by hand. Evidence turns a Scenario green and nothing else does.</li><li>A record tied to one codebase or technology. Stories describe needs, so they outlive the code.</li><li>A tool that guesses. Where it cannot be sure, it asks.</li></ul>
+<p>Next: the <a href="quick-start.html">quick start</a>, or the <a href="docs/model.html">model</a> in detail.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Introduction</a>
+        <a href="philosophy.html" aria-current="page">Philosophy</a>
+        <a href="quick-start.html">Quick start</a>
+        <a href="docs/index.html">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

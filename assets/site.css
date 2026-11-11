@@ -51,3 +51,41 @@
   text-align: center;
   color: var(--text-muted);
 }
+
+.prose {
+  max-width: 46rem;
+
+  & h1 {
+    margin-bottom: 0.4em;
+  }
+
+  & :is(h2, h3)[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  & h2 {
+    margin-top: 2em;
+  }
+
+  & :is(ul, ol) {
+    padding-left: 1.4em;
+  }
+
+  & li {
+    margin-bottom: 0.4em;
+  }
+
+  & pre,
+  & .table-wrap {
+    max-width: 100%;
+  }
+}
+
+.in-barn-left {
+  margin-top: 2.5em;
+  color: var(--text-muted);
+}
+
+.prose pre {
+  margin-bottom: 1.2em;
+}

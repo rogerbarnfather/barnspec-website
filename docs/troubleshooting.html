@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When something goes wrong · Barnspec</title>
+  <meta name="description" content="The messages Barnspec gives when something goes wrong, what each means and what to do.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html" aria-current="page">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>When something goes wrong</h1>
+        <p class="lede">The messages you will meet, and what to do about them.</p>
+<p>These are the messages you are most likely to meet, in Barnspec’s own words, each with what it means and what to do. Shown messages were produced by the real commands; paths and IDs are shortened with “…”.</p>
+<h2 id="setting-up">Setting up <a class="anchor" href="#setting-up" aria-label="Link to this section">#</a></h2>
+<h3 id="no-barn">There is no barn <a class="anchor" href="#no-barn" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec show
+There is no barn in "…/hotel" or any folder above it: no .barn folder was found. Start one with `barnspec init`.</code></pre><p>Barnspec only works inside a barn, and looks for a <code>.barn/</code> folder in the current folder and every folder above it.</p><p><strong>What to do:</strong> run <code>vendor/bin/barnspec init</code> at the project’s root, or run the command from inside the project.</p>
+<h3 id="no-area">No area of business found <a class="anchor" href="#no-area" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec map --area-of-business=nothing
+Barn: …/hotel
+No area of business found: nothing</code></pre><p>The name doesn’t match any area of business in the barn.</p><p><strong>What to do:</strong> run <code>vendor/bin/barnspec show</code> to list them, and use a name or slug from the list.</p>
+<h3 id="composer-options">A <code>--option</code> seems to be ignored <a class="anchor" href="#composer-options" aria-label="Link to this section">#</a></h3><p>You are running Barnspec through <code>composer run</code> or a Composer script, without <code>--</code> before the command. Composer takes anything beginning <code>--</code> for itself, silently.</p><p><strong>What to do:</strong> write <code>composer run barnspec -- &lt;command&gt; --option</code>, or run <code>vendor/bin/barnspec</code> directly.</p>
+<h2 id="capturing">Capturing <a class="anchor" href="#capturing" aria-label="Link to this section">#</a></h2>
+<h3 id="not-a-stage">… is not a lifecycle stage <a class="anchor" href="#not-a-stage" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec restage-story --area-of-business=reservations --story=cancel-their-booking --stage=nope
+'nope' is not a lifecycle stage. The backbone runs:
+  establish — The role gains what it needs to take part: …
+  …</code></pre><p>The stage must be one of <code>establish</code>, <code>adjust</code>, <code>transact</code>, <code>resolve</code> or <code>close</code>. The message lists all five with their meanings.</p><p><strong>What to do:</strong> use one of them, or <code>--clear</code> to leave the story Unassigned.</p>
+<h3 id="nothing-deleted">Nothing was deleted <a class="anchor" href="#nothing-deleted" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec delete --area-of-business=reservations --story=book-a-room
+Barn: …/hotel
+This deletes story 'book-a-room' of role 'guest'.
+Nothing was deleted. Pass --yes to go ahead without being asked.</code></pre><p>Barnspec says what it would delete and then waits for you to agree. Run where it can’t ask, such as a script, it deletes nothing.</p><p><strong>What to do:</strong> if you mean it, add <code>--yes</code>.</p>
+<h3 id="released-wording">… is released, so its wording no longer changes directly <a class="anchor" href="#released-wording" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec reword --area-of-business=reservations --story=book-a-room-for-a-run-of-nights --goal=zzz
+Barn: …/hotel
+Story 'book-a-room-for-a-run-of-nights' is released, so its wording no longer changes directly. Elaborate it in the open Phase instead: barnspec elaborate-story --area-of-business=reservations --story=book-a-room-for-a-run-of-nights --goal=... --reward=...</code></pre><p>The story’s Phase has been released, so its wording is locked. The same is said for deleting it, and for adding Scenarios with <code>create-scenario</code>:</p><pre><code>Story 'book-a-room-for-a-run-of-nights' is released, so it is kept for good. Retire its Scenarios through an elaboration instead: …
+Story 'book-a-room-for-a-run-of-nights' is released, so its Scenarios no longer change. It is elaborated in the active Phase: add "elaboration": true (or "amends": "&lt;scenario&gt;") to capture into that.</code></pre><p><strong>What to do:</strong> follow the message: <a href="phases.html#elaborate">elaborate</a> the story in the Phase being built, then make the change there.</p>
+<h2 id="tickets-and-runs">Tickets and runs <a class="anchor" href="#tickets-and-runs" aria-label="Link to this section">#</a></h2>
+<h3 id="no-scenarios">Story … has no scenarios yet <a class="anchor" href="#no-scenarios" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec work:create reservations cancel-their-booking x --title=T --description=D
+Barn: …/hotel
+Story 01a1cb3e-… has no scenarios yet — run `barnspec refine` to capture at least one concrete case before opening a ticket against it.</code></pre><p>A ticket belongs to a Scenario, and this story has none. A story with no concrete case has nothing to point work at.</p><p><strong>What to do:</strong> capture a Scenario first, with <code>refine</code> or <code>create-scenario</code>.</p>
+<h3 id="aborted">A deeper description of the work: Aborted <a class="anchor" href="#aborted" aria-label="Link to this section">#</a></h3><p><code>work:create</code> needs a title and a description. Run where it can’t ask, such as a script, it stops when one is missing.</p><p><strong>What to do:</strong> give both, with <code>--title</code> and <code>--description</code>.</p>
+<h3 id="no-ticket">No work ticket found with id or reference <a class="anchor" href="#no-ticket" aria-label="Link to this section">#</a></h3><p><code>work:status</code> and <code>work:delete</code> take a ticket’s id or its reference, within an area of business.</p><p><strong>What to do:</strong> run <code>work:list</code> for the Scenario to see its tickets’ ids and references.</p>
+<h3 id="settings-missing">settings.json not found <a class="anchor" href="#settings-missing" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/port-generator generate reservations
+…/hotel/.barn/barnspec/settings.json not found — create it with a "portStubs" section, e.g.:
+{"portStubs": {"directory": "tests/Spec/Port", "namespace": "App\\Tests\\Spec\\Port"}}</code></pre><p>The generator doesn’t know where to write the Ports.</p><p><strong>What to do:</strong> create the file as the message shows, then run it again. <a href="prove.html#ports">Prove a Scenario</a> has the rest of the setup.</p>
+<h3 id="todo">The Scenario crashed … TODO: implement <a class="anchor" href="#todo" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/scenario-bridge run reservations book-a-room-for-three-nights
+- Scenario: They will now book a room for three nights:
+        💥 When they book a room for three nights they expect it to be accepted but the Scenario crashed authenticating as guest: RuntimeException: TODO: implement App\Tests\Spec\Port\Reservations\Role\GuestAuthenticator::authenticate()
+Recorded this run against the Scenario (failed).</code></pre><p>A generated Port has not been filled in yet, so the run failed and recorded the failure.</p><p><strong>What to do:</strong> implement the class the message names, then run the Scenario again.</p>
+<h3 id="red">A Scenario is red though every ticket is done <a class="anchor" href="#red" aria-label="Link to this section">#</a></h3><p>That is the rule working: <em>built</em> is not <em>proven</em>. <code>work:list</code> says “Not yet run — prove it with <code>scenario-bridge run</code>” or shows the failing run.</p><p><strong>What to do:</strong> run the Scenario. It turns green only if it passes.</p>
+<h3 id="reopened">A green Scenario went back to yellow <a class="anchor" href="#reopened" aria-label="Link to this section">#</a></h3><p>A new ticket was opened on it. New work means the last run predates what is being changed, so the run was discarded.</p><p><strong>What to do:</strong> finish the ticket, then run the Scenario again.</p>
+<h2 id="releasing">Releasing <a class="anchor" href="#releasing" aria-label="Link to this section">#</a></h2>
+<h3 id="not-proven">… can’t be released until it is proven <a class="anchor" href="#not-proven" aria-label="Link to this section">#</a></h3><pre><code><span class="p">$ </span>vendor/bin/barnspec release-phase --area-of-business=reservations
+Barn: …/hotel
+first bookings can't be released until it is proven. These aren't proven yet:
+  - guest: cancel-their-booking (story, rough)
+  Each scenario needs its tickets done and a passing run (scenario-bridge run).</code></pre><p>Every Scenario in the Phase needs its tickets done and a passing run. The message lists the stories that aren’t proven yet, and the last of them is rough: it has no Scenario.</p><p><strong>What to do:</strong> prove each story listed, or delete it (until the Phase is released) if it doesn’t belong in this slice.</p>
+<h3 id="active-phase">… already has an active phase <a class="anchor" href="#active-phase" aria-label="Link to this section">#</a></h3><pre><code>'reservations' already has an active phase ('Phase 1'). Release it before starting the next one.</code></pre><p>An area of business has one Phase being built at a time.</p><p><strong>What to do:</strong> release the active Phase first.</p>
+        <div class="docs-next"><a href="glossary.html">← Glossary</a><span></span></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

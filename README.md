@@ -12,3 +12,8 @@ browser. Links between pages are relative, because GitHub Pages serves a project
 - `assets/screens/`: real captures of the tool, 2× resolution, from a disposable barn with made-up
   hotel data. `spec-map` and `spec-work` are copies of the main site's.
 - `docs/style-guide.md`: this site's style guide.
+
+Pages: `index.html` (introduction), `philosophy.html`, `quick-start.html`, and `docs/` (overview, model,
+capture, read, prove, phases, gui, cli, data, glossary, troubleshooting). Every command shown was run for
+real in a disposable barn with the released packages, and its output pasted in with paths and IDs
+shortened by "…". Retake them when a command's output changes.

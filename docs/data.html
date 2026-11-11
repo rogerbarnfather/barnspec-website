@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where your data lives · Barnspec</title>
+  <meta name="description" content="Where Barnspec keeps its records: the .barn folder, what is in it and how to start over.">
+  <link rel="icon" href="../assets/barnspec.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/base/base.css">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-brand="spec">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html"><svg class="mark tool-mark" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 16) scale(1.45) translate(-16 -16.5)" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.2" cy="16.6" r="2.9"/><circle cx="19.8" cy="16.6" r="2.9"/><path d="M15 16c.6-.7 1.4-.7 2 0"/><path d="M10.15 14.55C9.65 13.95 9.2 13.55 8.7 13.55M21.85 14.55C22.35 13.95 22.8 13.55 23.3 13.55"/></g></svg>Barnspec</a>
+      <nav aria-label="Barnspec">
+        <ul class="nav">
+          <li><a href="../philosophy.html">Philosophy</a></li>
+          <li><a href="../quick-start.html">Quick start</a></li>
+          <li><a href="index.html" aria-current="page">Documentation</a></li>
+          <li><a href="https://rogerbarnfather.github.io/barn-website/">Barn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="docs wrap wide">
+      <nav class="docs-nav" aria-label="Documentation"><h2>Start</h2><ul><li><a href="index.html">Overview</a></li><li><a href="model.html">The model</a></li></ul><h2>Tasks</h2><ul><li><a href="capture.html">Capture stories and Scenarios</a></li><li><a href="read.html">Read what you captured</a></li><li><a href="prove.html">Prove a Scenario</a></li><li><a href="phases.html">Phases, releasing and changing</a></li></ul><h2>Tools</h2><ul><li><a href="gui.html">The browser app</a></li><li><a href="cli.html">Command reference</a></li><li><a href="data.html" aria-current="page">Where your data lives</a></li></ul><h2>Reference</h2><ul><li><a href="glossary.html">Glossary</a></li><li><a href="troubleshooting.html">When something goes wrong</a></li></ul></nav>
+      <article class="docs-article">
+        <h1>Where your data lives</h1>
+        <p class="lede">One folder, in your project, committed with your code.</p>
+<p>Barnspec keeps everything in the project’s <em>barn</em>: a project whose root holds a <code>.barn/</code> folder.
+It finds the barn from any folder inside it, and writes nothing anywhere else. Without a barn it refuses to read or write, and
+<code>barnspec init</code> makes one.</p>
+<h2 id="contents">What is in it <a class="anchor" href="#contents" aria-label="Link to this section">#</a></h2>
+<pre><code>.barn/barnspec/areas-of-business/   one file for each area of business, with its roles, stories and building blocks
+.barn/barnspec/scenarios/           each area of business's Scenarios
+.barn/barnspec/work/                each area of business's tickets
+.barn/barnspec/settings.json        where generated Ports go (you create this)
+.barn/barnspec/refinements/         unfinished refinements saved from the browser app</code></pre>
+<p>Commit <code>.barn/</code> with your code. The files are JSON and are not meant to be edited by hand: use the
+commands or the browser app.</p>
+<h2 id="start-over">Start over <a class="anchor" href="#start-over" aria-label="Link to this section">#</a></h2>
+<p><code>wizard-reset</code> shows what it would remove. Nothing is deleted until you add <code>--force</code>.</p>
+<pre><code><span class="p">$ </span>vendor/bin/wizard-reset
+Barn: …/hotel
+[dry run] would remove …/hotel/.barn/barnspec/areas-of-business (2 file(s))
+[dry run] would remove …/hotel/.barn/barnspec/scenarios (1 file(s))
+
+Dry run: nothing was deleted. Run again with --force to delete it.</code></pre>
+<aside class="callout warning"><p><strong>Warning.</strong> <code>wizard-reset --force</code> deletes everything Barnspec has captured in the barn, and it cannot be undone. Commit first.</p></aside>
+        <div class="docs-next"><a href="cli.html">← Command reference</a><a href="glossary.html">Glossary →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Barnspec · © Roger Barnfather</span>
+      <nav aria-label="Footer">
+        <a href="../index.html">Introduction</a>
+        <a href="../philosophy.html">Philosophy</a>
+        <a href="../quick-start.html">Quick start</a>
+        <a href="index.html" aria-current="page">Documentation</a>
+        <a href="https://rogerbarnfather.github.io/barn-website/">Barn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
